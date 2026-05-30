@@ -8,9 +8,9 @@ ODL is a tiny, declarative Language for defining an object and transpiling it to
 As of now, the language is not very well defined, but current designs look like this:
 ```odl
 class person
-    name string
-    age int
-    is_unemployed bool
-    monthly_salary float
+    string name
+    int age
+    bool is_unemployed
+    float monthly_salary
 end
 ```
