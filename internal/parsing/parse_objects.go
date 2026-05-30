@@ -11,6 +11,10 @@ func ParseObjects(file []string, allowedTypes []string) ([]models.ObjectDefiniti
 	objects := []models.ObjectDefinition{}
 
 	for i, line := range file {
+		if strings.TrimSpace(line) == "" {
+			continue
+		}
+
 		lineNumber := i + 1
 		tokens := strings.Fields(line)
 
