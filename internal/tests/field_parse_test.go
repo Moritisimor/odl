@@ -21,7 +21,7 @@ func TestParseField(t *testing.T) {
 	ExpectedType := "string"
 	if field.FieldType != ExpectedType {
 		t.Errorf(
-			"field does not have the expected type. Expected '%s', got '%s'", 
+			"field does not have the expected type. Expected '%s', got '%s'",
 			ExpectedType, field.FieldType,
 		)
 	}
