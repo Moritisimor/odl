@@ -7,12 +7,7 @@ import (
 )
 
 func TestParseField(t *testing.T) {
-	allowedTypes := []string{
-		"string",
-		"int",
-	}
-
-	field, err := parsing.ParseField("string name option1 option2", allowedTypes)
+	field, err := parsing.ParseField("string name option1 option2")
 	if err != nil {
 		t.Errorf("Error while parsing field 1: %s", err.Error())
 	}

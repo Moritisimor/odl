@@ -8,13 +8,6 @@ import (
 )
 
 func TestParseObject(t *testing.T) {
-	legalTypes := []string{
-		"string",
-		"int",
-		"float",
-		"bool",
-	}
-
 	goodLines := []string{
 		"class person",
 		"    string name foo bar",
@@ -30,12 +23,12 @@ func TestParseObject(t *testing.T) {
 		"    float bar",
 	}
 
-	objs, err := parsing.ParseObjects(goodLines, legalTypes)
+	objs, err := parsing.ParseObjects(goodLines)
 	if err != nil {
 		t.Errorf("Error while parsing: %s", err.Error())
 	}
 
-	_, err = parsing.ParseObjects(neverEndedLines, legalTypes)
+	_, err = parsing.ParseObjects(neverEndedLines)
 	if err == nil {
 		t.Errorf("Error expected while parsing lines that were never ended, got nil")
 	}

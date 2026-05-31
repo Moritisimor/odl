@@ -8,9 +8,16 @@ import (
 	"github.com/Moritisimor/odl/internal/models"
 )
 
-func ParseField(line string, allowedTypes []string) (models.FieldDefinition, error) {
+func ParseField(line string) (models.FieldDefinition, error) {
 	fieldDef := models.FieldDefinition{}
 	tokens := strings.Fields(line)
+	allowedTypes := []string{
+		"string",
+		"int",
+		"float",
+		"bool",
+	}
+
 	if len(tokens) < 2 {
 		return fieldDef, fmt.Errorf("malformed line (expected at least 2 tokens)")
 	}

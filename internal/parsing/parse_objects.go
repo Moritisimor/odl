@@ -7,9 +7,9 @@ import (
 	"github.com/Moritisimor/odl/internal/models"
 )
 
-func ParseObjects(file []string, allowedTypes []string) ([]models.ObjectDefinition, error) {
+func ParseObjects(file []string) ([]models.ObjectDefinition, error) {
 	objects := []models.ObjectDefinition{}
-
+	
 	for i, line := range file {
 		if strings.TrimSpace(line) == "" {
 			continue
@@ -35,7 +35,7 @@ func ParseObjects(file []string, allowedTypes []string) ([]models.ObjectDefiniti
 					break
 				}
 
-				f, err := ParseField(strings.TrimSpace(field), allowedTypes)
+				f, err := ParseField(strings.TrimSpace(field))
 				if err != nil {
 					return objects, fmt.Errorf("line %d: error while parsing class: %s", lineNumber+j, err.Error())
 				}

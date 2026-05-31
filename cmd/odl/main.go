@@ -5,69 +5,53 @@ import (
 	"os"
 	"strings"
 
+	"github.com/Moritisimor/odl/internal/flags"
 	"github.com/Moritisimor/odl/internal/generators/java"
 	"github.com/Moritisimor/odl/internal/parsing"
 )
 
 func main() {
-	args := os.Args
-	if len(args) < 3 {
-		fmt.Printf("Usage: odl <file_name> <transpiler_target>\n")
+	flags, err := flags.ParseFlags(os.Args[1:])
+	if err != nil {
+		fmt.Printf("Error while parsing flags: %s\n", err.Error())
 		os.Exit(1)
 	}
 
-	fileName := args[1]
-	transpilerTarget := args[2]
+	if flags.Target == "java" && flags.Output != "" {
+		fmt.Println("Transpiler target may not be 'java' when output flag is set.")
+		fmt.Println("Why? Because a public Java Class expects its name to be the name of the file.")
+		fmt.Println("Omit the output flag. I will generate the appropriate files for you.")
+		os.Exit(1)
+	}
 
-	data, err := os.ReadFile(fileName)
+	data, err := os.ReadFile(flags.Input)
 	if err != nil {
-		fmt.Printf("Error while reading '%s': %s\n", args[1], err.Error())
+		fmt.Printf("Error while reading '%s': %s\n", flags.Input, err.Error())
 		os.Exit(1)
 	}
 
 	lines := strings.Split(string(data), "\n")
-	legalTypes := []string{
-		"string",
-		"int",
-		"float",
-		"bool",
-	}
-
-	objs, err := parsing.ParseObjects(lines, legalTypes)
+	objs, err := parsing.ParseObjects(lines)
 	if err != nil {
 		fmt.Printf("error while parsing: %s\n", err.Error())
 		os.Exit(1)
 	}
 
-	var files map[string]string
-	switch transpilerTarget {
-	case "java":
-		files, err = java.GenerateJava(objs)
-
-	default:
-		fmt.Printf("Unknown transpiler target '%s'\n", transpilerTarget)
-		os.Exit(1)
-	}
-
-	if err != nil {
-		fmt.Printf("Error while generating %s source code: %s", transpilerTarget, err.Error())
-		os.Exit(1)
-	}
-
-	for className, fileContent := range files {
-		var fileName string
-		switch transpilerTarget {
-		case "java":
-			fileName = className + ".java"
-
-		default:
-			fileName = className
-		}
-
-		err := os.WriteFile(fileName, []byte(fileContent), 0755)
+	// Java gets special treatment due to how public classes work
+	if flags.Target == "java" {
+		files, err := java.GenerateJava(objs)
 		if err != nil {
-			fmt.Printf("Could not write generator output to '%s': %s\n", fileName, err.Error())
-			continue
+			fmt.Printf("Error while generating java source code: %s\n", err.Error())
+			os.Exit(1)
 		}
+
+		for name, content := range files {
+			if err := os.WriteFile(name + ".java", []byte(content), 0755); err != nil {
+				fmt.Printf("Error while writing to file '%s': %s", name, err.Error())
+				continue
+			}
+		}
+
+		return
 	}
 }
