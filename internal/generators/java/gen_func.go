@@ -25,7 +25,7 @@ func GenerateJava(objDefs []models.ObjectDefinition) (map[string]string, error) 
 		var builder strings.Builder
 
 		// Class Name
-		builder.WriteString("class ")
+		builder.WriteString("public class ")
 		builder.WriteString(helpers.PascalCase(obj.Name))
 		builder.WriteString(" {\n")
 
