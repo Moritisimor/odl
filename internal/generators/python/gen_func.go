@@ -41,8 +41,9 @@ func GeneratePython(objDefs []models.ObjectDefinition) (string, error) {
 				helpers.SnakeCase(f.Name),
 			)
 		}
+
+		builder.WriteString("\n\n")
 	}
 
-	builder.WriteString("\n")
-	return builder.String(), nil
+	return strings.TrimSuffix(builder.String(), "\n"), nil
 }
