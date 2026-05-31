@@ -27,6 +27,7 @@ func ParseObjects(file []string) ([]models.ObjectDefinition, error) {
 			class := models.ObjectDefinition{
 				Name:   strings.Split(tokens[1], "_"),
 				Fields: []models.FieldDefinition{},
+				Options: tokens[2:],
 			}
 
 			for j, field := range file[i+1:] {
