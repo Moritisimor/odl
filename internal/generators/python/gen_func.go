@@ -23,7 +23,7 @@ func GeneratePython(objDefs []models.ObjectDefinition) (string, error) {
 		for i, f := range obj.Fields {
 			pythonType, ok := pythonTypes[f.FieldType]
 			if !ok {
-				return builder.String(), fmt.Errorf("i could not find a java equivalent to the type '%s'", f.FieldType)
+				return builder.String(), fmt.Errorf("i could not find a python equivalent to the type '%s'", f.FieldType)
 			}
 
 			fmt.Fprintf(&builder, "%s: %s", helpers.SnakeCase(f.Name), pythonType)
