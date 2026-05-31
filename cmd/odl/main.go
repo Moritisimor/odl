@@ -7,6 +7,7 @@ import (
 
 	"github.com/Moritisimor/odl/internal/flags"
 	"github.com/Moritisimor/odl/internal/generators/java"
+	"github.com/Moritisimor/odl/internal/generators/python"
 	"github.com/Moritisimor/odl/internal/parsing"
 )
 
@@ -53,5 +54,25 @@ func main() {
 		}
 
 		return
+	}
+
+	var name, content string
+	switch flags.Target {
+	case "python", "py":
+		name = strings.TrimSuffix(flags.Output, ".py") + ".py"
+		content, err = python.GeneratePython(objs)
+		if err != nil {
+			fmt.Printf("Error while generating python code: %s", err.Error())
+			os.Exit(1)
+		}
+
+	default:
+		fmt.Printf("Unknown target '%s'\n", flags.Target)
+		os.Exit(1)
+	}
+
+	if err := os.WriteFile(name, []byte(content), 0755); err != nil {
+		fmt.Printf("Error while writing to file '%s': %s", name, err.Error())
+		os.Exit(1)
 	}
 }
