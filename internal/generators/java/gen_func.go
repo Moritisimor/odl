@@ -44,21 +44,28 @@ func GenerateJava(objDefs []models.ObjectDefinition) (map[string]string, error) 
 		}
 
 		// Getters
-		builder.WriteString("\n")
 		for _, f := range obj.Fields {
 			javaType, ok := javaTypes[f.FieldType]
 			if !ok {
 				return files, fmt.Errorf("i could not find a java equivalent to the type '%s'", f.FieldType)
 			}
 
-			builder.WriteString(fmt.Sprintf(
-				"\n\tpublic %s get%s() {\n\t\treturn this.%s;\n\t}\n",
-				javaType, helpers.PascalCase(f.Name), helpers.CamelCase(f.Name),
-			))
+			if javaType == "boolean" && f.Name[0] == "is" {
+				fmt.Fprintf(
+					&builder, 
+					"\n\tpublic boolean %s() {\n\t\treturn this.%s;\n\t}\n",
+					helpers.CamelCase(f.Name), helpers.CamelCase(f.Name),
+				)
+			} else {
+				fmt.Fprintf(
+					&builder, 
+					"\n\tpublic %s get%s() {\n\t\treturn this.%s;\n\t}\n",
+					javaType, helpers.PascalCase(f.Name), helpers.CamelCase(f.Name),
+				)
+			}
 		}
 
 		// Setters
-		builder.WriteString("\n")
 		for _, f := range obj.Fields {
 			javaType, ok := javaTypes[f.FieldType]
 			if !ok {
