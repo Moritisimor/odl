@@ -37,7 +37,7 @@ func ParseObjects(file []string) ([]models.ObjectDefinition, error) {
 
 				f, err := ParseField(strings.TrimSpace(field))
 				if err != nil {
-					return objects, fmt.Errorf("line %d: error while parsing class: %s", lineNumber+j, err.Error())
+					return objects, fmt.Errorf("line %d: error while parsing class: %s", lineNumber + j + 1, err.Error())
 				}
 
 				class.Fields = append(class.Fields, f)

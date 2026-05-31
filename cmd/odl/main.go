@@ -57,8 +57,15 @@ func main() {
 	}
 
 	var name, content string
+	name = flags.Output
+	if name == "" {
+		name = "out"
+	}
+
 	switch flags.Target {
 	case "python", "py":
+
+
 		name = strings.TrimSuffix(flags.Output, ".py") + ".py"
 		content, err = python.GeneratePython(objs)
 		if err != nil {

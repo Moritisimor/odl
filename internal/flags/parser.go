@@ -50,9 +50,5 @@ func ParseFlags(args []string) (Flags, error) {
 		return flags, fmt.Errorf("Required Flag '--target' is not set.")
 	}
 
-	if flags.Output == "" {
-		flags.Output = "out"
-	}
-
 	return flags, nil
 }
