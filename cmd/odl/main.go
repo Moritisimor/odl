@@ -64,9 +64,7 @@ func main() {
 
 	switch flags.Target {
 	case "python", "py":
-
-
-		name = strings.TrimSuffix(flags.Output, ".py") + ".py"
+		name = strings.TrimSuffix(name, ".py") + ".py"
 		content, err = python.GeneratePython(objs)
 		if err != nil {
 			fmt.Printf("Error while generating python code: %s", err.Error())
