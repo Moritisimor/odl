@@ -20,7 +20,10 @@ A class simply consists of a name and its fields.
 Please note that EVERYTHING must be `snake_case`. This is not just a convention, the transpiler expects `snake_case` so it can construct proper, idiomatic names for the target language.
 
 ## Supported targets
-As of right now, only Java is supported. But as time goes on, more languages will be added.
+- Java
+- Python
+
+More on the way.
 
 ## Examples
 Take this small example:
