@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/Moritisimor/odl/internal/generators/java"
 	"github.com/Moritisimor/odl/internal/parsing"
 )
 
@@ -29,9 +30,14 @@ func main() {
 		"bool",
 	}
 
-	_, err = parsing.ParseObjects(lines, legalTypes)
+	objs, err := parsing.ParseObjects(lines, legalTypes)
 	if err != nil {
 		fmt.Printf("error while parsing: %s\n", err.Error())
 		os.Exit(1)
+	}
+
+	javaFiles, err := java.GenerateJava(objs)
+	for fileName, fileContent := range javaFiles {
+		fmt.Printf("==( %s )==\n%s", fileName, fileContent)
 	}
 }

@@ -25,7 +25,7 @@ func ParseObjects(file []string, allowedTypes []string) ([]models.ObjectDefiniti
 
 			wasEnded := false
 			class := models.ObjectDefinition{
-				Name: strings.Split(tokens[1], "_"),
+				Name:   strings.Split(tokens[1], "_"),
 				Fields: []models.FieldDefinition{},
 			}
 
@@ -37,7 +37,7 @@ func ParseObjects(file []string, allowedTypes []string) ([]models.ObjectDefiniti
 
 				f, err := ParseField(strings.TrimSpace(field), allowedTypes)
 				if err != nil {
-					return objects, fmt.Errorf("line %d: error while parsing class: %s", lineNumber + j, err.Error())
+					return objects, fmt.Errorf("line %d: error while parsing class: %s", lineNumber+j, err.Error())
 				}
 
 				class.Fields = append(class.Fields, f)
@@ -50,6 +50,6 @@ func ParseObjects(file []string, allowedTypes []string) ([]models.ObjectDefiniti
 			objects = append(objects, class)
 		}
 	}
-	
+
 	return objects, nil
 }

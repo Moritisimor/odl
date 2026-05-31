@@ -1,0 +1,6 @@
+class person
+    string name
+    int age
+    float monthly_salary
+    bool is_unemployed
+end
