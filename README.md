@@ -77,14 +77,21 @@ go build -ldflags="-s -w" -o odl cmd/odl/main.go
 
 ## Usage
 ```bash
-odl <input_file> <transpiler_target>
+odl <input_file> <options...>
 ```
 
-The first argument is the input file, the second argument is the transpiler target.
-
-For example, if you had a file named `person.odl` and you want to generate Java code:
+For example, if you had a file named `employee.odl` and you want to generate Python code, saving the file in `employee.py`:
 ```bash
-odl person.odl java
+odl employee.odl -t python -o employee
 ```
 
-For each class in your file, the transpiler generates a seperate file where the class is stored.
+ODL will append the appropriate suffix for you, although you can write out the suffix if you want to.
+
+If you had a file named `person.odl` and you want to generate Java code:
+```bash
+odl person.odl -t java
+```
+
+If you're transpiling for Java, then for each class in your file, the transpiler generates a seperate file where the class is stored.
+
+This is also why you MUST omit the output flag when transpiling for Java.
