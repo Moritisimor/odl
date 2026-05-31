@@ -33,7 +33,7 @@ end
 
 With Java as your target, the generated code would look like this:
 ```java
-class Person {
+public class Person {
 	private String name;
 	private int age;
 
