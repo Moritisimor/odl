@@ -1,6 +1,6 @@
 package models
 
 type ObjectDefinition struct {
-	Name 	string
+	Name 	[]string
 	Fields	[]FieldDefinition
 }

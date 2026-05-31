@@ -17,7 +17,7 @@ func TestParseField(t *testing.T) {
 		t.Errorf("Error while parsing field 1: %s", err.Error())
 	}
 
-	ExpectedName := "name"
+	ExpectedName := []string{"name"}
 	ExpectedType := "string"
 	if field.FieldType != ExpectedType {
 		t.Errorf(
@@ -26,7 +26,7 @@ func TestParseField(t *testing.T) {
 		)
 	}
 
-	if field.Name != ExpectedName {
+	if field.Name[0] != ExpectedName[0] {
 		t.Errorf(
 			"field does not have the expected name. Expected '%s', got '%s'",
 			ExpectedName, field.Name,

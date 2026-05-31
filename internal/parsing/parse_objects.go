@@ -25,7 +25,7 @@ func ParseObjects(file []string, allowedTypes []string) ([]models.ObjectDefiniti
 
 			wasEnded := false
 			class := models.ObjectDefinition{
-				Name: tokens[1],
+				Name: strings.Split(tokens[1], "_"),
 				Fields: []models.FieldDefinition{},
 			}
 

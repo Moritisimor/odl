@@ -20,7 +20,7 @@ func ParseField(line string, allowedTypes []string) (models.FieldDefinition, err
 	}
 
 	fieldDef.FieldType = tokens[0]
-	fieldDef.Name = tokens[1]
+	fieldDef.Name = strings.Split(tokens[1], "_")
 	fieldDef.Options = tokens[2:]
 	return fieldDef, nil
 } 

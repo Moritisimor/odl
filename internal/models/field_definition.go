@@ -1,7 +1,7 @@
 package models
 
 type FieldDefinition struct {
-	Name 		string
+	Name 		[]string
 	FieldType 	string
 	Options		[]string
 }
