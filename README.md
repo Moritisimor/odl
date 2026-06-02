@@ -23,8 +23,9 @@ Please note that EVERYTHING must be `snake_case`. This is not just a convention,
 - Java
 - Python
 - Rust
+- Go
 
-More on the way.
+More may always be added.
 
 ## Examples
 Take this small example:
