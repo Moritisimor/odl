@@ -8,6 +8,7 @@ import (
 	"github.com/Moritisimor/odl/internal/flags"
 	"github.com/Moritisimor/odl/internal/generators/java"
 	"github.com/Moritisimor/odl/internal/generators/python"
+	"github.com/Moritisimor/odl/internal/generators/rust"
 	"github.com/Moritisimor/odl/internal/parsing"
 )
 
@@ -66,15 +67,21 @@ func main() {
 	case "python", "py":
 		name = strings.TrimSuffix(name, ".py") + ".py"
 		content, err = python.GeneratePython(objs)
-		if err != nil {
-			fmt.Printf("Error while generating python code: %s", err.Error())
-			os.Exit(1)
-		}
+
+	case "rust":
+		name = strings.TrimSuffix(name, ".rs") + ".rs"
+		content, err = rust.GenerateRust(objs)
 
 	default:
 		fmt.Printf("Unknown target '%s'\n", flags.Target)
 		os.Exit(1)
 	}
+
+	if err != nil {
+		fmt.Printf("Error while generating %s code: %s", flags.Target, err.Error())
+		os.Exit(1)
+	}
+
 
 	if err := os.WriteFile(name, []byte(content), 0755); err != nil {
 		fmt.Printf("Error while writing to file '%s': %s", name, err.Error())

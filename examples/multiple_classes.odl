@@ -1,0 +1,11 @@
+class car
+    string manufacturer
+    string model
+    int year
+    float price
+end
+
+class customer
+    string first_name
+    string last_name
+end
