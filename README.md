@@ -22,6 +22,7 @@ Please note that EVERYTHING must be `snake_case`. This is not just a convention,
 ## Supported targets
 - Java
 - Python
+- Rust
 
 More on the way.
 
