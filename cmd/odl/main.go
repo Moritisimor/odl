@@ -49,7 +49,7 @@ func main() {
 
 		for name, content := range files {
 			if err := os.WriteFile(name + ".java", []byte(content), 0755); err != nil {
-				fmt.Printf("Error while writing to file '%s': %s", name, err.Error())
+				fmt.Printf("Error while writing to file '%s': %s\n", name, err.Error())
 				continue
 			}
 		}
@@ -78,13 +78,13 @@ func main() {
 	}
 
 	if err != nil {
-		fmt.Printf("Error while generating %s code: %s", flags.Target, err.Error())
+		fmt.Printf("Error while generating %s code: %s\n", flags.Target, err.Error())
 		os.Exit(1)
 	}
 
 
 	if err := os.WriteFile(name, []byte(content), 0755); err != nil {
-		fmt.Printf("Error while writing to file '%s': %s", name, err.Error())
+		fmt.Printf("Error while writing to file '%s': %s\n", name, err.Error())
 		os.Exit(1)
 	}
 }
