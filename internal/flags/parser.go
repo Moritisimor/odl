@@ -2,13 +2,21 @@ package flags
 
 import (
 	"fmt"
+	"os"
 	"slices"
 	"strings"
+
+	"github.com/Moritisimor/odl/internal/helpers"
 )
 
 func ParseFlags(args []string) (Flags, error) {
 	flags := Flags{}
 	ignoreable := []int{}
+
+	if slices.Contains(args, "--help") {
+		helpers.PrintHelp()
+		os.Exit(0)
+	}
 
 	for idx, arg := range args {
 		if !strings.HasPrefix(arg, "-") {

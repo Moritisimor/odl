@@ -17,7 +17,7 @@ import (
 func main() {
 	flags, err := flags.ParseFlags(os.Args[1:])
 	if err != nil {
-		fmt.Printf("Error while parsing flags: %s\n", err.Error())
+		fmt.Printf("Error while parsing flags: %s\nSet '--help' flag for help.\n", err.Error())
 		os.Exit(1)
 	}
 
