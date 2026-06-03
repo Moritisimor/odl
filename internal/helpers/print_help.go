@@ -13,6 +13,9 @@ func PrintHelp() {
 	fmt.Println("\t-o | --output <output file> (OPTIONAL)")
 	fmt.Println("\t\tNote: --output flag must be omitted when transpiling for Java.")
 
+	fmt.Println("\nAvailable Targets:")
+	fmt.Println("\t- Java\n\t- Python\n\t- C#\n\t- Go\n\t- Rust")
+
 	fmt.Println("\nGeneral Syntax:")
 	fmt.Println("\tclass <name> <options...>")
 	fmt.Println("\t\t<type> <name> <options...>")
