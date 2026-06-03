@@ -47,6 +47,9 @@ func ParseFlags(args []string) (Flags, error) {
 
 			flags.Output = args[idx + 1]
 			ignoreable = append(ignoreable, idx + 1)
+
+		default:
+			return flags, fmt.Errorf("Unknown flag: '%s'", arg)
 		}
 	}
 
