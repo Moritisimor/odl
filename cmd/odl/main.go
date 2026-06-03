@@ -78,7 +78,7 @@ func main() {
 		name = strings.TrimSuffix(name, ".go") + ".go"
 		content, err = golang.GenerateGo(objs)
 
-	case "csharp":
+	case "csharp", "c#":
 		name = strings.TrimSuffix(name, ".cs") + ".cs"
 		content, err = csharp.GenerateCSharp(objs)
 
