@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/Moritisimor/odl/internal/flags"
+	"github.com/Moritisimor/odl/internal/generators/csharp"
 	"github.com/Moritisimor/odl/internal/generators/golang"
 	"github.com/Moritisimor/odl/internal/generators/java"
 	"github.com/Moritisimor/odl/internal/generators/python"
@@ -74,8 +75,12 @@ func main() {
 		content, err = rust.GenerateRust(objs)
 
 	case "go":
-		name = strings.TrimSuffix(name, "go") + ".go"
+		name = strings.TrimSuffix(name, ".go") + ".go"
 		content, err = golang.GenerateGo(objs)
+
+	case "csharp":
+		name = strings.TrimSuffix(name, ".cs") + ".cs"
+		content, err = csharp.GenerateCSharp(objs)
 
 	default:
 		fmt.Printf("Unknown target '%s'\n", flags.Target)
