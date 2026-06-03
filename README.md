@@ -24,6 +24,7 @@ Please note that EVERYTHING must be `snake_case`. This is not just a convention,
 - Python
 - Rust
 - Go
+- C#
 
 More may always be added.
 
