@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/Moritisimor/odl/internal/helpers"
 	"github.com/Moritisimor/odl/internal/models"
 )
 
@@ -23,11 +24,18 @@ func ParseObjects(file []string) ([]models.ObjectDefinition, error) {
 				return objects, fmt.Errorf("line %d: expected identifier for class", lineNumber)
 			}
 
+			name := strings.Split(tokens[1], "_")
+			for _, obj := range objects {
+				if helpers.PascalCase(obj.Name) == helpers.PascalCase(name) {
+					return objects, fmt.Errorf("tried declaring class '%s' twice", helpers.SnakeCase(name))
+				}
+			}
+
 			wasEnded := false
 			class := models.ObjectDefinition{
-				Name:   strings.Split(tokens[1], "_"),
-				Fields: []models.FieldDefinition{},
-				Options: tokens[2:],
+				Name:   	strings.Split(tokens[1], "_"),
+				Fields: 	[]models.FieldDefinition{},
+				Options: 	tokens[2:],
 			}
 
 			for j, field := range file[i+1:] {
